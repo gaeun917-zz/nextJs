@@ -10,10 +10,10 @@ app.prepare()
         const server = express();
 
         server.get('/p/:id', (req, res) => {
-            const acutalPage = '/post';
-            const queryParam = {title: req.params.id};
+            const actualPage = '/post'; // rendering it on past.js
+            const queryParam = {id: req.params.id};
 
-            app.render(req, res, acutalPage, queryParam);
+            app.render(req, res, actualPage, queryParam);
         })
 
         server.get('*', (req, res) => {

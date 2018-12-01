@@ -1,17 +1,20 @@
 import Layout from '../components/MyLayout.js'
+import fetch from 'isomorphic-unfetch'
 
-// props.url is passed down only on main component
-// so on exporting main component, props.url.query.title should be passed down as a prop
-
-//sub component
-const Content = (prop) => (
+const Post = (props) => (
     <Layout>
-        <h1>{prop.url}</h1>
-        <p>post content</p>
+        <h1>{props.show.name}</h1>
+        <p>{props.show.summary.replace(/<[/]?p/g, '')}</p>
+        <img src={props.show.image.medium}/>
     </Layout>
 )
 
-// main component
-export default (props) => (
-    <Content url={props.url.query.title}/>
-)
+Post.getInitialProps = async function (context) {
+    const {id} = context.query; // get id from res.queryParam
+    const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+    const show = await res.json();
+
+    return{show}
+}
+
+export default Post
