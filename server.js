@@ -9,6 +9,13 @@ app.prepare()
     .then( () => {
         const server = express();
 
+        server.get('/p/:id', (req, res) => {
+            const acutalPage = '/post';
+            const queryParam = {title: req.params.id};
+
+            app.render(req, res, acutalPage, queryParam);
+        })
+
         server.get('*', (req, res) => {
             return handle(req, res)
         })
