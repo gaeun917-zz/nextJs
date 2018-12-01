@@ -1,11 +1,39 @@
 import Layout from '../components/MyLayout.js'
 import fetch from 'isomorphic-unfetch'
+import Markdown from 'react-markdown'
 
 const Post = (props) => (
     <Layout>
         <h1>{props.show.name}</h1>
         <p>{props.show.summary.replace(/<[/]?p/g, '')}</p>
         <img src={props.show.image.medium}/>
+
+        <div className='markdown'>
+            <Markdown source={`
+             ### markdown
+             this is a post [link](/link)
+
+            `}/>
+        </div>
+        <style jsx global>{`
+            .markdown {
+                font-family: 'Arial';
+            }
+            .markdown a {
+                text-decoration: none;
+                color: blue;
+            }
+            .markdown a:hover {
+                opacity: .6;
+            }
+            .markdown h3 {
+                margin: 0
+                padding: 0
+                text-transform: uppercase;
+
+        `}</style>
+
+
     </Layout>
 )
 
