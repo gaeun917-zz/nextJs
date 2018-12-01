@@ -1,8 +1,7 @@
 import Layout from '../components/MyLayout'
 
-const Index = () => (
+export default () => (
    <Layout>
-       <p>hello</p>
+       <p>about page</p>
    </Layout>
 )
-export default Index
